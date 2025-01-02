@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MGRMarko</string>
+    <string name="LanguageSelect">Chose a language</string>
+    <string name="Kotlin">Kotlin</string>
+    <string name="Java">Java</string>
+    <string name="Mixed">Mixed</string>
+</resources>
