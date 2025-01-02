@@ -2,6 +2,7 @@ package pl.marosek.mgrmarko
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
@@ -10,15 +11,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnAES = findViewById<Button>(R.id.btnKt)
-        val btnRSA = findViewById<Button>(R.id.btnJava)
+        val btnKt = findViewById<Button>(R.id.KotlinButton)
+        val btnJava = findViewById<Button>(R.id.JavaButton)
+        val btnMixed = findViewById<Button>(R.id.MixedButton)
 
-        btnRSA.setOnClickListener {
+        btnKt.setOnClickListener {
             val intent = Intent(this, KotlinActivity::class.java)
             startActivity(intent)
         }
-        btnAES.setOnClickListener {
+        btnJava.setOnClickListener {
             val intent = Intent(this, JavaActivity::class.java)
+            startActivity(intent)
+        }
+        btnMixed.setOnClickListener {
+            val intent = Intent(this, MixedActivity::class.java)
             startActivity(intent)
         }
     }

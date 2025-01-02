@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "pl.marosek.mgrmarko"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "pl.marosek.mgrmarko"
