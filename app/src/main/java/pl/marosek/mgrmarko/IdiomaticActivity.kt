@@ -1,4 +1,4 @@
 package pl.marosek.mgrmarko
 
-class MixedActivity {
+class IdiomaticActivity {
 }

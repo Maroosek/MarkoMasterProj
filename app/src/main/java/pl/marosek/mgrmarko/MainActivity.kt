@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //TODO Separate this by operation rather than language, easier to measure time by calling 3 functions
+
         val btnKt = findViewById<Button>(R.id.KotlinButton)
         val btnJava = findViewById<Button>(R.id.JavaButton)
         val btnMixed = findViewById<Button>(R.id.MixedButton)
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnMixed.setOnClickListener {
-            val intent = Intent(this, MixedActivity::class.java)
+            val intent = Intent(this, IdiomaticActivity::class.java)
             startActivity(intent)
         }
     }
