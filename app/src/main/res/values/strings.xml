@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">MGRMarko</string>
-    <string name="LanguageSelect">Chose a language</string>
-    <string name="Kotlin">Kotlin</string>
+    <string name="OperationSelect">Chose operation</string>
+    <string name="Matrix">Matrix</string>
     <string name="Java">Java</string>
-    <string name="Mixed">Mixed</string>
-    <string name="KotlinText">Hello Kotlin</string>
+    <string name="Crypto">Cryptography</string>
+    <string name="MatrixText">Matrix time</string>
+    <string name="CryptoText">Aaaaaa</string>
+    <string name="CryptoBtn">Hack</string>
 </resources>

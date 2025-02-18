@@ -11,22 +11,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //TODO Separate this by operation rather than language, easier to measure time by calling 3 functions
 
-        val btnKt = findViewById<Button>(R.id.KotlinButton)
+        val btnMatrix = findViewById<Button>(R.id.MatrixButton)
         val btnJava = findViewById<Button>(R.id.JavaButton)
-        val btnMixed = findViewById<Button>(R.id.MixedButton)
+        val btnCrypto = findViewById<Button>(R.id.CryptoButton)
 
-        btnKt.setOnClickListener {
-            val intent = Intent(this, KotlinActivity::class.java)
+        btnMatrix.setOnClickListener {
+            val intent = Intent(this, MatrixActivity::class.java)
             startActivity(intent)
         }
         btnJava.setOnClickListener {
             val intent = Intent(this, JavaActivity::class.java)
             startActivity(intent)
         }
-        btnMixed.setOnClickListener {
-            val intent = Intent(this, IdiomaticActivity::class.java)
+        btnCrypto.setOnClickListener {
+            val intent = Intent(this, CryptoActivity::class.java)
             startActivity(intent)
         }
     }

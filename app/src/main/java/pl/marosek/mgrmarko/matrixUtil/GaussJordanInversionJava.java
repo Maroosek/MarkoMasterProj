@@ -1,4 +1,4 @@
-package pl.marosek.mgrmarko;
+package pl.marosek.mgrmarko.matrixUtil;
 
 public class GaussJordanInversionJava {
     public static double[][] invert(double[][] matrix) {

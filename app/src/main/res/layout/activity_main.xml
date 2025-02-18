@@ -9,7 +9,7 @@
         android:id="@+id/ChoseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/LanguageSelect"
+        android:text="@string/OperationSelect"
         android:textSize="24sp"
         android:paddingTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,10 +17,10 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/KotlinButton"
+        android:id="@+id/MatrixButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Kotlin"
+        android:text="@string/Matrix"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ChoseText" />
@@ -32,13 +32,13 @@
         android:text="@string/Java"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/KotlinButton" />
+        app:layout_constraintTop_toBottomOf="@id/MatrixButton" />
 
     <Button
-        android:id="@+id/MixedButton"
+        android:id="@+id/CryptoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Mixed"
+        android:text="@string/Crypto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/JavaButton" />

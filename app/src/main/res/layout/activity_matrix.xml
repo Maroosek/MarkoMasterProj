@@ -7,11 +7,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/KotlinText"
+        android:id="@+id/MatrixText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="64dp"
-        android:text="@string/KotlinText"
+        android:text="@string/MatrixText"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.447"
@@ -19,14 +19,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/KotlinButton"
+        android:id="@+id/MatrixButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Kotlin"
+        android:text="@string/Matrix"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/KotlinText" />
+        app:layout_constraintTop_toBottomOf="@+id/MatrixText" />
 
     <NumberPicker
         android:id="@+id/NumberPickerKotlin"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/KotlinButton" />
+        app:layout_constraintTop_toBottomOf="@+id/MatrixButton" />
 
 
 
