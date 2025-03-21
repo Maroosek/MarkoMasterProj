@@ -44,7 +44,10 @@ class MatrixActivity : AppCompatActivity() {
             endTime = System.currentTimeMillis()
             val matrixTimeJava = ((endTime - startTime) * 0.001).toString()
 
-            textViewKotlin.text = matrixSize.toString() + " Matrix size\n" + matrixTimeInline + "s inline\n" + matrixTimePure + "s pure" + "\n" + matrixTimeJava + "s Java"
+            textViewKotlin.text = matrixSize.toString() + " Matrix size\n" +
+                    matrixTimeInline + "s inline kt\n" + matrixTimePure +
+                    "s pure kt" + "\n" + matrixTimeJava + "s Java"
+
             Toast.makeText(this, "inverted", Toast.LENGTH_SHORT).show()
 
             if (!checkMatrixEquality(invertedMatrix, invertedMatrixInline!!) || !checkMatrixEquality(invertedMatrix, invertedMatrixJava)) {
