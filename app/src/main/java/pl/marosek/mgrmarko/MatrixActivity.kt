@@ -22,7 +22,7 @@ class MatrixActivity : AppCompatActivity() {
         val textViewKotlin = findViewById<TextView>(R.id.MatrixText)
         val buttonKotlin = findViewById<Button>(R.id.MatrixButton)
 
-        numberPickerKotlin.minValue = 2
+        numberPickerKotlin.minValue = 50
         numberPickerKotlin.maxValue = 2000
 
         buttonKotlin.setOnClickListener {

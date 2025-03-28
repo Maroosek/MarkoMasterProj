@@ -23,7 +23,7 @@ class CryptoActivity : AppCompatActivity() {
         val rsaJava = pl.marosek.mgrmarko.cryptoUtils.RSAJava()
 
         numberPickerCrypto.minValue = 5
-        numberPickerCrypto.maxValue = 1000
+        numberPickerCrypto.maxValue = 100
 
         cryptoButton.setOnClickListener {
             val passwordAmount = numberPickerCrypto.value
@@ -31,7 +31,7 @@ class CryptoActivity : AppCompatActivity() {
             var startTime = System.currentTimeMillis()
             for (i in 0 until passwordAmount) {
                 val password = generatePassword()
-                val keyPair = rsaKt.generateKeysRSA(4096)
+                val keyPair = rsaKt.generateKeysRSA(2048)
                 val encryptedPassword = rsaKt.encryptRSA(password, keyPair!!)
             }
             var endTime = System.currentTimeMillis()
@@ -40,14 +40,14 @@ class CryptoActivity : AppCompatActivity() {
             startTime = System.currentTimeMillis()
             for (i in 0 until passwordAmount) {
                 val password = generatePassword()
-                val keyPair = rsaJava.generateKeysRSA(4096)
+                val keyPair = rsaJava.generateKeysRSA(2048)
                 val encryptedPassword = rsaJava.encryptRSA(password, keyPair!!)
             }
             endTime = System.currentTimeMillis()
             val cryptoTimeJava = ((endTime - startTime) * 0.001).toString()
 
-            cryptoTextView.text = passwordAmount.toString() + " passwords\n" + cryptoTimeKotlin + "s Kotlin" + "\n" + cryptoTimeJava + "s Java"
-
+            cryptoTextView.text = passwordAmount.toString() + " passwords\n" +
+                    cryptoTimeKotlin + "s Kotlin" + "\n" + cryptoTimeJava + "s Java"
         }
     }
 

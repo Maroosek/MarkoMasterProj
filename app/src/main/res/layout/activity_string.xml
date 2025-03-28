@@ -7,11 +7,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/CryptoText"
+        android:id="@+id/StringText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="64dp"
-        android:text="@string/CryptoText"
+        android:text="@string/StringText"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.447"
@@ -19,22 +19,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/CryptoButton"
+        android:id="@+id/StringButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/CryptoBtn"
+        android:text="@string/StringBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CryptoText" />
+        app:layout_constraintTop_toBottomOf="@+id/StringText" />
 
     <NumberPicker
-        android:id="@+id/NumberPickerCrypto"
+        android:id="@+id/NumberPickerString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CryptoButton" />
+        app:layout_constraintTop_toBottomOf="@+id/StringButton" />
 
 
 

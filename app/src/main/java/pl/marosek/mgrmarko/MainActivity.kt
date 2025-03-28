@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnJava.setOnClickListener {
-            val intent = Intent(this, JavaActivity::class.java)
+            val intent = Intent(this, StringActivity::class.java)
             startActivity(intent)
         }
         btnCrypto.setOnClickListener {
