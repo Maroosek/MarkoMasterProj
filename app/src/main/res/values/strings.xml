@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">MGRMarko</string>
     <string name="OperationSelect">Chose operation</string>
-    <string name="Matrix">Matrix</string>
     <string name="String">Word Counter</string>
     <string name="Crypto">Cryptography</string>
     <string name="MatrixText">Matrix time</string>
     <string name="CryptoText">Crypto time</string>
+    <string name="StringText">String time</string>
     <string name="CryptoBtn">Hack</string>
-    <string name="CryptoTextScore">Score xd</string>
     <string name="StringBtn">idk</string>
-    <string name="StringText">Strgignds</string>
+    <string name="MatrixBtn">Matrix</string>
+    <string name="CryptoTextScore">Score xd</string>
+
+
 </resources>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversion
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversionInline
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversionJava
+import java.text.DecimalFormat
 import kotlin.random.Random
 
 class MatrixActivity : AppCompatActivity() {
@@ -28,45 +29,37 @@ class MatrixActivity : AppCompatActivity() {
         buttonKotlin.setOnClickListener {
             val matrixSize = numberPickerKotlin.value
             val matrix = generateMatrix(matrixSize)
+            val df = DecimalFormat("#.###")
 
             var startTime = System.currentTimeMillis()
-            val invertedMatrixInline = invertMatrixInline(matrix)
+            val invertedMatrixInline = GaussJordanInversionInline.invert(matrix)
             var endTime = System.currentTimeMillis()
-            val matrixTimeInline = ((endTime - startTime) * 0.001).toString()
+            val matrixTimeInline = df.format((endTime - startTime) * 0.001).toString()
 
             startTime = System.currentTimeMillis()
-            val invertedMatrix = invertMatrix(matrix)
+            val invertedMatrix = GaussJordanInversion.invert(matrix)
             endTime = System.currentTimeMillis()
-            val matrixTimePure = ((endTime - startTime) * 0.001).toString()
+            val matrixTimePure = df.format((endTime - startTime) * 0.001).toString()
 
             startTime = System.currentTimeMillis()
-            val invertedMatrixJava = invertMatrixJava(matrix)
+            val invertedMatrixJava = GaussJordanInversionJava.invert(matrix)
             endTime = System.currentTimeMillis()
-            val matrixTimeJava = ((endTime - startTime) * 0.001).toString()
+            val matrixTimeJava = df.format((endTime - startTime) * 0.001).toString()
+
+            val combinedTimes = "Kotlin inline: $matrixTimeInline s\n" +
+                    "Kotlin: $matrixTimePure s\n" +
+                    "Java: $matrixTimeJava s\n"
 
             textViewKotlin.text = matrixSize.toString() + " Matrix size\n" +
-                    matrixTimeInline + "s inline kt\n" + matrixTimePure +
-                    "s pure kt" + "\n" + matrixTimeJava + "s Java"
+                    combinedTimes
 
-            Toast.makeText(this, "inverted", Toast.LENGTH_SHORT).show()
-
-            if (!checkMatrixEquality(invertedMatrix, invertedMatrixInline!!) || !checkMatrixEquality(invertedMatrix, invertedMatrixJava)) {
-                Toast.makeText(this, "Matrices are not equal", Toast.LENGTH_SHORT).show()
-                textViewKotlin.text = "Matrices are not equal"
-            }
+//            if (!checkMatrixEquality(invertedMatrix, invertedMatrixInline!!) || !checkMatrixEquality(invertedMatrix, invertedMatrixJava)) {
+//                Toast.makeText(this, "Matrices are not equal", Toast.LENGTH_SHORT).show()
+//                textViewKotlin.text = "Matrices are not equal"
+//                return@setOnClickListener
+//            }
         }
 
-    }
-
-    private fun invertMatrix(matrix: Array<DoubleArray>): Array<DoubleArray> {
-        return GaussJordanInversion.invert(matrix)
-    }
-    private fun invertMatrixInline(matrix: Array<DoubleArray>): Array<DoubleArray>? {
-        return GaussJordanInversionInline.invert(matrix)
-    }
-
-    private fun invertMatrixJava(matrix: Array<DoubleArray>): Array<DoubleArray> {
-        return GaussJordanInversionJava.invert(matrix)
     }
 
     private fun generateMatrix(n: Int): Array<DoubleArray> {

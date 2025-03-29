@@ -6,6 +6,7 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import pl.marosek.mgrmarko.cryptoUtils.RSAKotlin
+import java.text.DecimalFormat
 import java.util.Random
 
 class CryptoActivity : AppCompatActivity() {
@@ -27,6 +28,7 @@ class CryptoActivity : AppCompatActivity() {
 
         cryptoButton.setOnClickListener {
             val passwordAmount = numberPickerCrypto.value
+            val df = DecimalFormat("#.###")
 
             var startTime = System.currentTimeMillis()
             for (i in 0 until passwordAmount) {
@@ -35,7 +37,7 @@ class CryptoActivity : AppCompatActivity() {
                 val encryptedPassword = rsaKt.encryptRSA(password, keyPair!!)
             }
             var endTime = System.currentTimeMillis()
-            val cryptoTimeKotlin = ((endTime - startTime) * 0.001).toString()
+            val cryptoTimeKotlin = df.format((endTime - startTime) * 0.001).toString()
 
             startTime = System.currentTimeMillis()
             for (i in 0 until passwordAmount) {
@@ -44,10 +46,13 @@ class CryptoActivity : AppCompatActivity() {
                 val encryptedPassword = rsaJava.encryptRSA(password, keyPair!!)
             }
             endTime = System.currentTimeMillis()
-            val cryptoTimeJava = ((endTime - startTime) * 0.001).toString()
+            val cryptoTimeJava = df.format((endTime - startTime) * 0.001).toString()
+
+            val combinedTimes = "Kotlin: $cryptoTimeKotlin s\n" +
+                    "Java: $cryptoTimeJava s\n"
 
             cryptoTextView.text = passwordAmount.toString() + " passwords\n" +
-                    cryptoTimeKotlin + "s Kotlin" + "\n" + cryptoTimeJava + "s Java"
+                    combinedTimes
         }
     }
 

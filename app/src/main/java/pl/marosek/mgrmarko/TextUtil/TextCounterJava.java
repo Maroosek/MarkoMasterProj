@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TextCounterJava {
-    public static Map<String, Integer> countWords(String text) {
+    public Map<String, Integer> countWords(String text) {
         Map<String, Integer> words = new HashMap<>();
         String[] wordsArray = text.split("\\s+");
         for (String word : wordsArray) {
