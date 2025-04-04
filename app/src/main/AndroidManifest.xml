@@ -16,6 +16,11 @@
         android:theme="@style/Theme.MGRMarko"
         tools:targetApi="31">
         <activity
+            android:name=".CalendarActivity"
+            android:exported="false"
+            android:label="@string/title_activity_calendar"
+            android:theme="@style/Theme.MGRMarko" />
+        <activity
             android:name=".StringActivity"
             android:exported="false" />
         <activity

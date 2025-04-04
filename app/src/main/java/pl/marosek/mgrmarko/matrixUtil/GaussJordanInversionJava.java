@@ -1,7 +1,7 @@
 package pl.marosek.mgrmarko.matrixUtil;
 
 public class GaussJordanInversionJava {
-    public static double[][] invert(double[][] matrix) {
+    public double[][] invert(double[][] matrix) {
         int n = matrix.length;
         double[][] augmentedMatrix = new double[n][2 * n];
         double[][] invertedMatrix = new double[n][n];

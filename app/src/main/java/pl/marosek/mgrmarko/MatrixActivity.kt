@@ -14,7 +14,6 @@ import kotlin.random.Random
 
 class MatrixActivity : AppCompatActivity() {
 
-    //TODO recheck if all 3 methods are working the same and can be measured without any doubt
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matrix)
@@ -32,17 +31,17 @@ class MatrixActivity : AppCompatActivity() {
             val df = DecimalFormat("#.###")
 
             var startTime = System.currentTimeMillis()
-            val invertedMatrixInline = GaussJordanInversionInline.invert(matrix)
+            val invertedMatrixInline = GaussJordanInversionInline().invert(matrix)
             var endTime = System.currentTimeMillis()
             val matrixTimeInline = df.format((endTime - startTime) * 0.001).toString()
 
             startTime = System.currentTimeMillis()
-            val invertedMatrix = GaussJordanInversion.invert(matrix)
+            val invertedMatrix = GaussJordanInversion().invert(matrix)
             endTime = System.currentTimeMillis()
             val matrixTimePure = df.format((endTime - startTime) * 0.001).toString()
 
             startTime = System.currentTimeMillis()
-            val invertedMatrixJava = GaussJordanInversionJava.invert(matrix)
+            val invertedMatrixJava = GaussJordanInversionJava().invert(matrix)
             endTime = System.currentTimeMillis()
             val matrixTimeJava = df.format((endTime - startTime) * 0.001).toString()
 
@@ -50,7 +49,7 @@ class MatrixActivity : AppCompatActivity() {
                     "Kotlin: $matrixTimePure s\n" +
                     "Java: $matrixTimeJava s\n"
 
-            textViewKotlin.text = matrixSize.toString() + " Matrix size\n" +
+            textViewKotlin.text = "Matrix size: $matrixSize \n" +
                     combinedTimes
 
 //            if (!checkMatrixEquality(invertedMatrix, invertedMatrixInline!!) || !checkMatrixEquality(invertedMatrix, invertedMatrixJava)) {

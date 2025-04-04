@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         val btnMatrix = findViewById<Button>(R.id.MatrixButton)
         val btnJava = findViewById<Button>(R.id.JavaButton)
         val btnCrypto = findViewById<Button>(R.id.CryptoButton)
+        val btnCalendarKt = findViewById<Button>(R.id.CalendarButtonKt)
+        val btnCalendarJava = findViewById<Button>(R.id.CalendarButtonJava)
 
         btnMatrix.setOnClickListener {
             val intent = Intent(this, MatrixActivity::class.java)
@@ -28,6 +30,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, CryptoActivity::class.java)
             startActivity(intent)
         }
+        btnCalendarKt.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
+//        btnCalendarJava.setOnClickListener {
+//            val intent = Intent(this, CalendarActivityJava::class.java)
+//            startActivity(intent)
+//        }
+
     }
 
     override fun onStart(){
