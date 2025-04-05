@@ -1,20 +1,18 @@
 package pl.marosek.mgrmarko
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import pl.marosek.mgrmarko.R
 import pl.marosek.mgrmarko.databinding.ActivityCalendarBinding
 
 data class MoodData(
     val id: Int,
-    val date: String,
-    val mood: Int,
-    val description: String
+    var date: String,
+    var mood: Int,
+    var description: String
 )
 var moodList = mutableListOf<MoodData>()
 
@@ -36,9 +34,10 @@ class CalendarActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
 //        binding.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//            Snackbar.make(view, "Select Date and click Add to add day mood\n To edit entry simply click on it", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
 //        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

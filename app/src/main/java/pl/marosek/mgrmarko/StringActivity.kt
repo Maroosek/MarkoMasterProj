@@ -6,6 +6,7 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import pl.marosek.mgrmarko.FileManager.FileManager
 import pl.marosek.mgrmarko.TextUtil.TextCounterJava
 import pl.marosek.mgrmarko.TextUtil.TextCounterKotlin
 import pl.marosek.mgrmarko.TextUtil.TextCounterKotlinInline
@@ -56,6 +57,13 @@ class StringActivity : AppCompatActivity() {
                 val combinedTimes = "Kotlin inline: $kotlinInlineTime s\n" +
                         "Kotlin: $kotlinTime s\n" +
                         "Java: $javaTime s\n"
+
+                FileManager().saveDataToFile(
+                        this,
+                        "String",
+                        "Lorem Ipsum extended $numberOfLoops Times \n" +
+                                combinedTimes
+                )
 
                 stringTextView.text = "Lorem Ipsum extended $numberOfLoops Times \n" +
                         combinedTimes

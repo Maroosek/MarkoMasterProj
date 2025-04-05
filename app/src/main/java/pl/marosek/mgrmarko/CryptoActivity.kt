@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import pl.marosek.mgrmarko.FileManager.FileManager
 import pl.marosek.mgrmarko.cryptoUtils.RSAKotlin
 import java.text.DecimalFormat
 import java.util.Random
@@ -50,6 +51,13 @@ class CryptoActivity : AppCompatActivity() {
 
             val combinedTimes = "Kotlin: $cryptoTimeKotlin s\n" +
                     "Java: $cryptoTimeJava s\n"
+
+            FileManager().saveDataToFile(
+                this,
+                "Crypto",
+                "Passwords: $passwordAmount\n" +
+                        combinedTimes
+            )
 
             cryptoTextView.text = passwordAmount.toString() + " passwords\n" +
                     combinedTimes

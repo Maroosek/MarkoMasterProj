@@ -6,6 +6,7 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import pl.marosek.mgrmarko.FileManager.FileManager
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversion
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversionInline
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversionJava
@@ -48,6 +49,13 @@ class MatrixActivity : AppCompatActivity() {
             val combinedTimes = "Kotlin inline: $matrixTimeInline s\n" +
                     "Kotlin: $matrixTimePure s\n" +
                     "Java: $matrixTimeJava s\n"
+
+            FileManager().saveDataToFile(
+                this,
+                "Matrix",
+                "Matrix size: $matrixSize \n" +
+                        combinedTimes
+            )
 
             textViewKotlin.text = "Matrix size: $matrixSize \n" +
                     combinedTimes
