@@ -1,4 +1,4 @@
-package pl.marosek.mgrmarko.FileManager
+package pl.marosek.mgrmarko.fileManager
 
 import android.content.ContentUris
 import android.content.ContentValues
@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -56,7 +55,7 @@ class FileManager {
 
         val contentResolver = context.contentResolver
 
-        // Najpierw sprawdzamy czy plik już istnieje
+        // Check if the file already exists
         val collection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
         } else {
@@ -84,15 +83,15 @@ class FileManager {
 
         try {
             if (existingFileUri != null) {
-                // Plik istnieje - dopisujemy dane
+                // If exists - append data
                 contentResolver.openOutputStream(existingFileUri!!, "wa")?.use { outputStream ->
                     val timestamp = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
                     val dataToAppend = "\n\n[$timestamp] Źródło: $source\n$data"
                     outputStream.write(dataToAppend.toByteArray())
                 }
-                Toast.makeText(context, "Zaktualizowano plik $fileName", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Updated file $fileName", Toast.LENGTH_SHORT).show()
             } else {
-                // Plik nie istnieje - tworzymy nowy
+                // If not exists - create new
                 val values = ContentValues().apply {
                     put(MediaStore.Downloads.DISPLAY_NAME, fileName)
                     put(MediaStore.Downloads.MIME_TYPE, "text/plain")
@@ -116,13 +115,13 @@ class FileManager {
                         contentResolver.update(newFileUri, values, null, null)
                     }
 
-                    Toast.makeText(context, "Utworzono nowy plik $fileName", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Created new file $fileName", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(context, "Nie udało się utworzyć pliku.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Could not create file.", Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (e: Exception) {
-            Toast.makeText(context, "Błąd podczas zapisywania: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Error while saving: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 }

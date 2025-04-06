@@ -1,4 +1,4 @@
-package pl.marosek.mgrmarko.CalendarKotlin
+package pl.marosek.mgrmarko.calendarKotlin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

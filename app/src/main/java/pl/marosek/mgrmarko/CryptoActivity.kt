@@ -5,14 +5,13 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import pl.marosek.mgrmarko.FileManager.FileManager
+import pl.marosek.mgrmarko.fileManager.FileManager
 import pl.marosek.mgrmarko.cryptoUtils.RSAKotlin
 import java.text.DecimalFormat
 import java.util.Random
 
 class CryptoActivity : AppCompatActivity() {
 
-    //TODO recheck if all 2 classes properly encrypt passwords
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crypto)

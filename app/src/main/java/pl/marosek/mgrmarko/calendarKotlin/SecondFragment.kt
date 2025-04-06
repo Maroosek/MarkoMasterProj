@@ -1,4 +1,4 @@
-package pl.marosek.mgrmarko.CalendarKotlin
+package pl.marosek.mgrmarko.calendarKotlin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -61,7 +61,7 @@ class SecondFragment : Fragment() {
 
         binding.buttonSecond.setOnClickListener {
             if (itemId != null) {
-                saveEditedInformation(itemId.toInt(), selectedDate, binding.numberPickerMood.value, binding.editTextDayDesc.text.toString())
+                saveEditedInformation(itemId.toInt(), binding.numberPickerMood.value, binding.editTextDayDesc.text.toString())
             } else {
                 saveInformation(selectedDate, binding.numberPickerMood.value, binding.editTextDayDesc.text.toString())
             }
@@ -87,10 +87,9 @@ class SecondFragment : Fragment() {
         moodList.add(moodData)
     }
 
-    private fun saveEditedInformation(itemId: Int, selectedDate : String, moodNumber: Int, dayDescription: String) {
+    private fun saveEditedInformation(itemId: Int, moodNumber: Int, dayDescription: String) {
         for (i in moodList) {
             if (i.id == itemId) {
-                i.date = selectedDate
                 i.mood = moodNumber
                 i.description = dayDescription
             }

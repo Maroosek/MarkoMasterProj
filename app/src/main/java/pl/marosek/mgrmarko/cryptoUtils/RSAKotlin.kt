@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets
 import java.security.KeyPair
 import java.security.KeyPairGenerator
 import java.security.SecureRandom
-import java.util.Random
 import javax.crypto.Cipher
 
 class RSAKotlin {
@@ -26,17 +25,17 @@ class RSAKotlin {
         }
     }
 
-    fun decryptRSA(password: String, keypair: KeyPair): String? {
-        return try {
-            val cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding")
-            cipher.init(Cipher.DECRYPT_MODE, keypair.private)
-            val decrypted = cipher.doFinal(Base64.decode(password, Base64.DEFAULT))
-            String(decrypted, StandardCharsets.UTF_8)
-        } catch (e: Exception) {
-            Log.e(TAG, "Decryption error", e)
-            null
-        }
-    }
+//    fun decryptRSA(password: String, keypair: KeyPair): String? {
+//        return try {
+//            val cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding")
+//            cipher.init(Cipher.DECRYPT_MODE, keypair.private)
+//            val decrypted = cipher.doFinal(Base64.decode(password, Base64.DEFAULT))
+//            String(decrypted, StandardCharsets.UTF_8)
+//        } catch (e: Exception) {
+//            Log.e(TAG, "Decryption error", e)
+//            null
+//        }
+//    }
 
     fun generateKeysRSA(size: Int): KeyPair? {
         return try {
@@ -49,11 +48,11 @@ class RSAKotlin {
         }
     }
 
-    fun getPublicKey(keypair: KeyPair): String {
-        return Base64.encodeToString(keypair.public.encoded, Base64.DEFAULT)
-    }
-
-    fun getPrivateKey(keypair: KeyPair): String {
-        return Base64.encodeToString(keypair.private.encoded, Base64.DEFAULT)
-    }
+//    fun getPublicKey(keypair: KeyPair): String {
+//        return Base64.encodeToString(keypair.public.encoded, Base64.DEFAULT)
+//    }
+//
+//    fun getPrivateKey(keypair: KeyPair): String {
+//        return Base64.encodeToString(keypair.private.encoded, Base64.DEFAULT)
+//    }
 }

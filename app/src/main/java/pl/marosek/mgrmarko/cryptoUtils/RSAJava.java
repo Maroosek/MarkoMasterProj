@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
-import java.util.Random;
 import javax.crypto.Cipher;
 
 public class RSAJava {
@@ -24,17 +23,17 @@ public class RSAJava {
         }
     }
 
-    public String decryptRSA(String password, KeyPair keypair) {
-        try {
-            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-            cipher.init(Cipher.DECRYPT_MODE, keypair.getPrivate());
-            byte[] decrypted = cipher.doFinal(Base64.decode(password, Base64.DEFAULT));
-            return new String(decrypted, StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            Log.e(TAG, "Decryption error", e);
-            return null;
-        }
-    }
+//    public String decryptRSA(String password, KeyPair keypair) {
+//        try {
+//            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+//            cipher.init(Cipher.DECRYPT_MODE, keypair.getPrivate());
+//            byte[] decrypted = cipher.doFinal(Base64.decode(password, Base64.DEFAULT));
+//            return new String(decrypted, StandardCharsets.UTF_8);
+//        } catch (Exception e) {
+//            Log.e(TAG, "Decryption error", e);
+//            return null;
+//        }
+//    }
 
     public KeyPair generateKeysRSA(int size) {
         try {
@@ -47,11 +46,11 @@ public class RSAJava {
         }
     }
 
-    public String getPublicKey(KeyPair keypair) {
-        return Base64.encodeToString(keypair.getPublic().getEncoded(), Base64.DEFAULT);
-    }
-
-    public String getPrivateKey(KeyPair keypair) {
-        return Base64.encodeToString(keypair.getPrivate().getEncoded(), Base64.DEFAULT);
-    }
+//    public String getPublicKey(KeyPair keypair) {
+//        return Base64.encodeToString(keypair.getPublic().getEncoded(), Base64.DEFAULT);
+//    }
+//
+//    public String getPrivateKey(KeyPair keypair) {
+//        return Base64.encodeToString(keypair.getPrivate().getEncoded(), Base64.DEFAULT);
+//    }
 }

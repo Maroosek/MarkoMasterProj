@@ -1,4 +1,4 @@
-package pl.marosek.mgrmarko.TextUtil
+package pl.marosek.mgrmarko.textUtil
 
 class TextCounterKotlinInline {
 

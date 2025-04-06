@@ -13,14 +13,32 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.marosek.mgrmarko.R;
 import pl.marosek.mgrmarko.databinding.ActivityCalendarJavaBinding;
 
-//TODO Recreate CalendarActivity and fragments in Java :)
 public class CalendarActivityJava extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityCalendarJavaBinding binding;
+
+    public static class MoodData {
+        public int id;
+        public String date;
+        public int mood;
+        public String description;
+
+        public MoodData(int id, String date, int mood, String description) {
+            this.id = id;
+            this.date = date;
+            this.mood = mood;
+            this.description = description;
+        }
+    }
+
+    public static List<MoodData> moodList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/First2Fragment"
-        android:name="pl.marosek.mgrmarko.CalendarJava.First2Fragment"
+        android:name="pl.marosek.mgrmarko.calendarJava.FirstFragmentJava"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first_java">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/Second2Fragment"
-        android:name="pl.marosek.mgrmarko.CalendarJava.Second2Fragment"
+        android:name="pl.marosek.mgrmarko.calendarJava.SecondFragmentJava"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second_java">
 

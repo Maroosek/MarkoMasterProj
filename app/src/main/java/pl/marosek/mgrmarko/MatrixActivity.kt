@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import pl.marosek.mgrmarko.FileManager.FileManager
+import pl.marosek.mgrmarko.fileManager.FileManager
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversion
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversionInline
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversionJava
