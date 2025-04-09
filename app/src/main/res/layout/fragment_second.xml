@@ -53,8 +53,8 @@
 
         <EditText
             android:id="@+id/editText_dayDesc"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
+            android:layout_width="260dp"
+            android:layout_height="130dp"
             android:layout_marginTop="16dp"
             android:hint="Enter text"
             android:inputType="textMultiLine"
