@@ -73,7 +73,7 @@ public class FirstFragmentJava extends Fragment {
             //Toast.makeText(getContext(), "Selected item: " + selectedItem, Toast.LENGTH_SHORT).show();
 
             for (CalendarActivityJava.MoodData item : CalendarActivityJava.moodList) {
-                String displayText = "Mood: " + item.mood + " \n Description: " + item.description;
+                String displayText = "Mood: " + item.mood + "\nDescription: " + item.description;
                 //Toast.makeText(getContext(), "Display Text: " + displayText, Toast.LENGTH_SHORT).show();
                 if (selectedItem.equals(displayText)) {
                     itemId = item.id;
@@ -115,7 +115,7 @@ public class FirstFragmentJava extends Fragment {
         List<String> displayItems = new ArrayList<>();
 
         for (CalendarActivityJava.MoodData item : filteredList) {
-            displayItems.add("Mood: " + item.mood + " \n Description: " + item.description);
+            displayItems.add("Mood: " + item.mood + "\nDescription: " + item.description);
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
