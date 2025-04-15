@@ -5,6 +5,10 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.marosek.mgrmarko.fileManager.FileManager
 import pl.marosek.mgrmarko.textUtil.TextCounterJava
 import pl.marosek.mgrmarko.textUtil.TextCounterKotlin
@@ -21,52 +25,51 @@ class StringActivity : AppCompatActivity() {
         val numberPickerString = findViewById<NumberPicker>(R.id.NumberPickerString)
         val stringTextView = findViewById<TextView>(R.id.StringText)
         val stringButton = findViewById<Button>(R.id.StringButton)
-        numberPickerString.minValue = 1
-        numberPickerString.maxValue = 2000
+        numberPickerString.minValue = 500
+        numberPickerString.maxValue = 10000
 
         stringButton.setOnClickListener {
-                val numberOfLoops = numberPickerString.value
-                val text = extendLoremIpsum(numberOfLoops)
-                val df = DecimalFormat("#.###")
+            val numberOfLoops = numberPickerString.value
+            val df = DecimalFormat("#.###")
+            stringTextView.text = "Generating"
 
-                var startTime = System.currentTimeMillis()
-                val wordsKtInline = TextCounterKotlinInline().countWords(text)
-                var endTime = System.currentTimeMillis()
+            lifecycleScope.launch {
+               val text = withContext(Dispatchers.Default) { extendLoremIpsum(numberOfLoops) }
 
-                val kotlinInlineTime = df.format((endTime - startTime) * 0.001).toString()
+                val (wordsKtInline, kotlinInlineTime) = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    val result = TextCounterKotlinInline().countWords(text)
+                    val end = System.currentTimeMillis()
+                     result to df.format((end - start) * 0.001).toString()
+                }
 
-                startTime = System.currentTimeMillis()
-                val wordsKt = TextCounterKotlin().countWords(text)
-                endTime = System.currentTimeMillis()
+                val (wordsKt, kotlinTime) = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    val result = TextCounterKotlin().countWords(text)
+                    val end = System.currentTimeMillis()
+                    result to df.format((end - start) * 0.001).toString()
+                }
 
-                val kotlinTime = df.format((endTime - startTime) * 0.001).toString()
-
-                startTime = System.currentTimeMillis()
-                val wordsJava = TextCounterJava().countWords(text)
-                endTime = System.currentTimeMillis()
-
-                val javaTime = df.format((endTime - startTime) * 0.001).toString()
-
-//                if (!checkEquality(wordsKtInline, wordsKt) || !checkEquality(wordsKtInline, wordsJava)) {
-//                        Toast.makeText(this, "Word maps are not equal", Toast.LENGTH_SHORT).show()
-//                        stringTextView.text = "Word maps are not equal"
-//                        return@setOnClickListener
-//                }
+                val (wordsJava, javaTime) = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    val result = TextCounterJava().countWords(text)
+                    val end = System.currentTimeMillis()
+                    result to df.format((end - start) * 0.001).toString()
+                }
 
                 val combinedTimes = "Kotlin inline: $kotlinInlineTime s\n" +
                         "Kotlin: $kotlinTime s\n" +
                         "Java: $javaTime s\n"
 
                 FileManager().saveDataToFile(
-                        this,
+                        this@StringActivity, // lub inna nazwa aktywności
                         "String",
-                        "Lorem Ipsum extended $numberOfLoops Times \n" +
-                                combinedTimes
+                        "Lorem Ipsum extended $numberOfLoops Times \n$combinedTimes"
                 )
 
-                stringTextView.text = "Lorem Ipsum extended $numberOfLoops Times \n" +
-                        combinedTimes
+                stringTextView.text = "Lorem Ipsum extended $numberOfLoops Times \n$combinedTimes"
                 }
+            }
         }
 
         fun checkEquality(map1: Map<String, Int>, map2: Map<String, Int>): Boolean {

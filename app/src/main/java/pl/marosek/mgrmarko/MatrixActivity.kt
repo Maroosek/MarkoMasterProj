@@ -5,6 +5,10 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.marosek.mgrmarko.fileManager.FileManager
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversion
 import pl.marosek.mgrmarko.matrixUtil.GaussJordanInversionInline
@@ -27,43 +31,45 @@ class MatrixActivity : AppCompatActivity() {
 
         buttonKotlin.setOnClickListener {
             val matrixSize = numberPickerKotlin.value
-            val matrix = generateMatrix(matrixSize)
             val df = DecimalFormat("#.###")
+            textViewKotlin.text = "Generating"
 
-            var startTime = System.currentTimeMillis()
-            val invertedMatrixInline = GaussJordanInversionInline().invert(matrix)
-            var endTime = System.currentTimeMillis()
-            val matrixTimeInline = df.format((endTime - startTime) * 0.001).toString()
+            lifecycleScope.launch {
+                val matrix = withContext(Dispatchers.Default) { generateMatrix(matrixSize) }
 
-            startTime = System.currentTimeMillis()
-            val invertedMatrix = GaussJordanInversion().invert(matrix)
-            endTime = System.currentTimeMillis()
-            val matrixTimePure = df.format((endTime - startTime) * 0.001).toString()
+                val (invertedMatrixInline, matrixTimeInline) = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    val result = GaussJordanInversionInline().invert(matrix)
+                    val end = System.currentTimeMillis()
+                    result to df.format((end - start) * 0.001).toString()
+                }
 
-            startTime = System.currentTimeMillis()
-            val invertedMatrixJava = GaussJordanInversionJava().invert(matrix)
-            endTime = System.currentTimeMillis()
-            val matrixTimeJava = df.format((endTime - startTime) * 0.001).toString()
+                val (invertedMatrix, matrixTimePure) = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    val result = GaussJordanInversion().invert(matrix)
+                    val end = System.currentTimeMillis()
+                    result to df.format((end - start) * 0.001).toString()
+                }
 
-            val combinedTimes = "Kotlin inline: $matrixTimeInline s\n" +
-                    "Kotlin: $matrixTimePure s\n" +
-                    "Java: $matrixTimeJava s\n"
+                val (invertedMatrixJava, matrixTimeJava) = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    val result = GaussJordanInversionJava().invert(matrix)
+                    val end = System.currentTimeMillis()
+                    result to df.format((end - start) * 0.001).toString()
+                }
 
-            FileManager().saveDataToFile(
-                this,
-                "Matrix",
-                "Matrix size: $matrixSize \n" +
-                        combinedTimes
-            )
+                val combinedTimes = "Kotlin inline: $matrixTimeInline s\n" +
+                        "Kotlin: $matrixTimePure s\n" +
+                        "Java: $matrixTimeJava s\n"
 
-            textViewKotlin.text = "Matrix size: $matrixSize \n" +
-                    combinedTimes
+                FileManager().saveDataToFile(
+                    this@MatrixActivity,
+                    "Matrix",
+                    "Matrix size: $matrixSize \n$combinedTimes"
+                )
 
-//            if (!checkMatrixEquality(invertedMatrix, invertedMatrixInline!!) || !checkMatrixEquality(invertedMatrix, invertedMatrixJava)) {
-//                Toast.makeText(this, "Matrices are not equal", Toast.LENGTH_SHORT).show()
-//                textViewKotlin.text = "Matrices are not equal"
-//                return@setOnClickListener
-//            }
+                textViewKotlin.text = "Matrix size: $matrixSize \n$combinedTimes"
+            }
         }
 
     }

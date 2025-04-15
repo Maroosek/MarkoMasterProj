@@ -5,6 +5,10 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.marosek.mgrmarko.fileManager.FileManager
 import pl.marosek.mgrmarko.cryptoUtils.RSAKotlin
 import java.text.DecimalFormat
@@ -24,42 +28,47 @@ class CryptoActivity : AppCompatActivity() {
         val rsaJava = pl.marosek.mgrmarko.cryptoUtils.RSAJava()
 
         numberPickerCrypto.minValue = 5
-        numberPickerCrypto.maxValue = 100
+        numberPickerCrypto.maxValue = 500
 
         cryptoButton.setOnClickListener {
             val passwordAmount = numberPickerCrypto.value
             val df = DecimalFormat("#.###")
+            cryptoTextView.text = "Generating"
 
-            var startTime = System.currentTimeMillis()
-            for (i in 0 until passwordAmount) {
-                val password = generatePassword()
-                val keyPair = rsaKt.generateKeysRSA(2048)
-                val encryptedPassword = rsaKt.encryptRSA(password, keyPair!!)
+            lifecycleScope.launch {
+                val cryptoTimeKotlin = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    for (i in 0 until passwordAmount) {
+                        val password = generatePassword()
+                        val keyPair = rsaKt.generateKeysRSA(2048)
+                        val encryptedPassword = rsaKt.encryptRSA(password, keyPair!!)
+                    }
+                    val end = System.currentTimeMillis()
+                    df.format((end - start) * 0.001).toString()
+                }
+
+                val cryptoTimeJava = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    for (i in 0 until passwordAmount) {
+                        val password = generatePassword()
+                        val keyPair = rsaJava.generateKeysRSA(2048)
+                        val encryptedPassword = rsaJava.encryptRSA(password, keyPair!!)
+                    }
+                    val end = System.currentTimeMillis()
+                    df.format((end - start) * 0.001).toString()
+                }
+
+                val combinedTimes = "Kotlin: $cryptoTimeKotlin s\n" +
+                        "Java: $cryptoTimeJava s\n"
+
+                FileManager().saveDataToFile(
+                    this@CryptoActivity,
+                    "Crypto",
+                    "Passwords: $passwordAmount\n$combinedTimes"
+                )
+
+                cryptoTextView.text = "$passwordAmount passwords\n$combinedTimes"
             }
-            var endTime = System.currentTimeMillis()
-            val cryptoTimeKotlin = df.format((endTime - startTime) * 0.001).toString()
-
-            startTime = System.currentTimeMillis()
-            for (i in 0 until passwordAmount) {
-                val password = generatePassword()
-                val keyPair = rsaJava.generateKeysRSA(2048)
-                val encryptedPassword = rsaJava.encryptRSA(password, keyPair!!)
-            }
-            endTime = System.currentTimeMillis()
-            val cryptoTimeJava = df.format((endTime - startTime) * 0.001).toString()
-
-            val combinedTimes = "Kotlin: $cryptoTimeKotlin s\n" +
-                    "Java: $cryptoTimeJava s\n"
-
-            FileManager().saveDataToFile(
-                this,
-                "Crypto",
-                "Passwords: $passwordAmount\n" +
-                        combinedTimes
-            )
-
-            cryptoTextView.text = passwordAmount.toString() + " passwords\n" +
-                    combinedTimes
         }
     }
 
