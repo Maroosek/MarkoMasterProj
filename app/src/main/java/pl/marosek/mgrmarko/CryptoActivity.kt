@@ -47,7 +47,7 @@ class CryptoActivity : AppCompatActivity() {
                     df.format((end - start) * 0.001).toString()
                 }
 
-                val cyptoTimeKotlinInline = withContext(Dispatchers.Default) {
+                val cryptoTimeKotlinInline = withContext(Dispatchers.Default) {
                     val start = System.currentTimeMillis()
                     for (i in 0 until passwordAmount) {
                         val password = generatePassword()
@@ -70,7 +70,7 @@ class CryptoActivity : AppCompatActivity() {
                 }
 
                 val combinedTimes = "Kotlin: $cryptoTimeKotlin s\n" +
-                        "Kotlin inline: $cyptoTimeKotlinInline s\n" +
+                        "Kotlin inline: $cryptoTimeKotlinInline s\n" +
                         "Java: $cryptoTimeJava s\n"
 
                 FileManager().saveDataToFile(

@@ -26,7 +26,7 @@ class StringActivity : AppCompatActivity() {
         val stringTextView = findViewById<TextView>(R.id.StringText)
         val stringButton = findViewById<Button>(R.id.StringButton)
         numberPickerString.minValue = 500
-        numberPickerString.maxValue = 10000
+        numberPickerString.maxValue = 18000
 
         stringButton.setOnClickListener {
             val numberOfLoops = numberPickerString.value
@@ -88,11 +88,11 @@ class StringActivity : AppCompatActivity() {
                                 "Sed sit amet libero condimentum, suscipit diam et, semper nunc. Donec eu risus vitae odio porttitor volutpat eget sed nisl. Nam sit amet quam vel tortor maximus placerat. Quisque et ultricies elit. Donec dui urna, placerat eu tempor eget, blandit ac sem. Aenean sem mauris, tincidunt vitae est ut, laoreet rutrum leo. Pellentesque accumsan a enim at varius. Praesent id velit dignissim, tincidunt erat a, semper eros. Phasellus leo purus, iaculis non dapibus quis, semper nec urna. Aenean eu leo sit amet magna egestas fringilla et vel enim. Donec nec elementum odio." +
                                 "Suspendisse imperdiet vitae ipsum eget vehicula. Vivamus dictum elit at purus sollicitudin fermentum. Donec fermentum malesuada massa vel cursus. Duis at tincidunt justo. Proin ullamcorper neque at odio rhoncus rutrum. Duis pellentesque egestas porta. Proin sed tortor vitae eros ultrices tincidunt. Donec elit metus, posuere in risus pulvinar, convallis cursus ex. Ut lacinia, ipsum sit amet congue pretium, mi eros fringilla nibh, eget porttitor dui lectus eu enim. Quisque pulvinar justo id dolor malesuada semper. Suspendisse ac risus varius, blandit leo vel, finibus nisl. Vivamus faucibus imperdiet massa. Fusce nec tempor risus. Proin velit massa, lacinia molestie tempor sit amet, suscipit ut nibh. Vivamus in tortor vitae nibh cursus interdum."
 
-                var result = ""
-                for (i in 0 until n) {
-                        result += loremIpsum
+            return buildString(loremIpsum.length * n) {
+                repeat(n) {
+                    append(loremIpsum)
                 }
-                return result
+            }
         }
 
 }
