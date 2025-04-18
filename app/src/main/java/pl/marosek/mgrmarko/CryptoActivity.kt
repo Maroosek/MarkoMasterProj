@@ -47,6 +47,17 @@ class CryptoActivity : AppCompatActivity() {
                     df.format((end - start) * 0.001).toString()
                 }
 
+                val cyptoTimeKotlinInline = withContext(Dispatchers.Default) {
+                    val start = System.currentTimeMillis()
+                    for (i in 0 until passwordAmount) {
+                        val password = generatePassword()
+                        val keyPair = rsaKt.generateKeysRSAInline(2048)
+                        val encryptedPassword = rsaKt.encryptRSAinline(password, keyPair!!)
+                    }
+                    val end = System.currentTimeMillis()
+                    df.format((end - start) * 0.001).toString()
+                }
+
                 val cryptoTimeJava = withContext(Dispatchers.Default) {
                     val start = System.currentTimeMillis()
                     for (i in 0 until passwordAmount) {
@@ -59,6 +70,7 @@ class CryptoActivity : AppCompatActivity() {
                 }
 
                 val combinedTimes = "Kotlin: $cryptoTimeKotlin s\n" +
+                        "Kotlin inline: $cyptoTimeKotlinInline s\n" +
                         "Java: $cryptoTimeJava s\n"
 
                 FileManager().saveDataToFile(
