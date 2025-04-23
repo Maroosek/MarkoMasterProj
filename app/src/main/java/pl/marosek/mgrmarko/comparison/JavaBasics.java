@@ -13,6 +13,13 @@ class JavaVariables {
         final int constant = 10;
         // stała, nie można zmienić wartości
 
+        String text = "Hello";
+
+        System.out.println(text + ", World");
+
+        String multiline = "Line 1\nLine 2\nLine 3";
+        System.out.println(multiline);
+
     }
 }
 
@@ -89,12 +96,6 @@ class JavaLoops {
             System.out.println(i);
             i++;
         }
-
-        i = 0;
-        do {
-            System.out.println(i);
-            i++;
-        } while (i < 5);
     }
 }
 

@@ -6,11 +6,23 @@ package pl.marosek.mgrmarko.comparison
 
 fun main() {
     val x = 5
-    // Stała, nie można zmienić wartości
+
     var y = 10
     // typ zmiennej jest automatycznie wywnioskowany
     var z: Int = 15
+    println(z)
     z += 5
+    println(z)
+
+    var text = "Hello"
+
+    println("$text, World!")
+
+    val multiLine = """
+        This is a multi-line string
+        It can span multiple lines
+    """.trimIndent()
+    println(multiLine)
 }
 
 

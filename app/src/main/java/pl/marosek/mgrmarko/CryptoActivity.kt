@@ -52,7 +52,7 @@ class CryptoActivity : AppCompatActivity() {
                     for (i in 0 until passwordAmount) {
                         val password = generatePassword()
                         val keyPair = rsaKt.generateKeysRSAInline(2048)
-                        val encryptedPassword = rsaKt.encryptRSAinline(password, keyPair!!)
+                        val encryptedPassword = rsaKt.encryptRSAInline(password, keyPair!!)
                     }
                     val end = System.currentTimeMillis()
                     df.format((end - start) * 0.001).toString()
@@ -86,7 +86,7 @@ class CryptoActivity : AppCompatActivity() {
 
     fun generatePassword(): String {
         val chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        val passwordLength = Random().nextInt(20) + 8
+        val passwordLength = Random().nextInt(12) + 20
         val password = StringBuilder()
         val random = Random()
 
